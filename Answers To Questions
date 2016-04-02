@@ -1,0 +1,15 @@
+Answers To Questions:
+
+1. What is your haack and why did you do it? What is its social impact? Our hack is a tool that allows you to look at your carbon footprint and allows you to compare your footprint with the average American's footprint. It uses regularly updated data from the EPA and gives you a national and global sense of the problem.
+
+2. Explain the technical details of your hack.
+
+There are three pages on this website:
+1. Carbon emission calculator- allows you to enter inputs and determines your footprint. It uses Bootstrap formatting and sends data to another page. 
+2. Used Google Maps API and jquery to show relative color-coded CO2 emission rates by state in the United States. 
+
+
+3. What did you learn and how do you want to expand upon your idea in the future? 
+
+None of us had ever been to a hackathon or had ever worked on web development so we learned a lot. Just getting a feel for javascript, html, and css was cool. We also got some expeirience with APIs and want to keep building on this knowledge. 
+In the future, I would want to have a more detailed website that helps people determine why their footprint is so large and how they can reduce it in the future.

@@ -18,7 +18,7 @@
 <h1 align="center" style="color:darkgrey;"> Find Your Carbon Footprint  </h1>
 
   <!-- Form class from getbootstrap.com -->
- <form class="form-horizontal" action="Stats.html" method="get" id="form">
+ <form class="form-horizontal" action="page3.html" method="get" id="form">
 
   <div class="form-group">
     <label for="NumPeople" class="col-sm-2 control-label labelColor">Number Of People In Your Household:</label>
@@ -149,7 +149,9 @@ function calcIndivEmission(e) {
 
 
   var total = CONVERSTIONTOTONS * (numMiles + natGas + electricity + fuelOil + recycle);
+  total = parseFloat(total).toFixed(2);
   
+  // send total to the next page3 of the website
   document.getElementById("indivEmissions").value = total;
 }
 
