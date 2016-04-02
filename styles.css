@@ -1,0 +1,29 @@
+body {
+    color: darkgrey;
+    font-family: Helvetica;
+}
+
+h1 {
+    color: darkgrey;
+    font-family: Helvetica;
+
+}
+
+p {
+    color:darkgrey;
+    font-family: Helvetica;
+
+}
+
+.checkbox label, .control-label {
+	color: darkgrey;
+	font-family: Helvetica;
+
+}
+
+
+.colorLink {			/*m . means that it beloongs to a class */
+	font-family: Helvetica;
+	text-align: center;
+
+}
