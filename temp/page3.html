@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link rel = "stylesheet" href = "styles.css">
+
+<title>CO2 Emisison Averages</title>
+
+</head>
+
+<body background = "earthBG.jpg" align="center">
+
+<ul id="list" style="list-style-type:none">
+	<li>See how much you consume compared to people in other countries!</li>
+</ul>  
+
+<script>
+
+var emUser = getParameterByName("indivEmissions")
+var arr = [];
+
+arr.push({
+	name: "US",
+	emission: 11.2
+});
+
+
+arr.push({
+	name: "UK",
+	emission: 5.5
+});
+
+
+arr.push({
+	name: "China",
+	emission: 4.7
+});
+
+
+arr.push({
+	name: "Russia",
+	emission: 7.2
+});
+
+
+arr.push({
+	name: "Luxembourg",
+	emission: 13.3	
+});
+
+
+arr.push({
+	name: "Australia",
+	emission: 11.9
+});
+
+
+arr.push({
+	name: "Canada",
+	emission: 9.9
+});
+
+
+arr.push({
+	name: "India",
+	emission: 1.6
+});
+
+
+arr.push({
+	name: "Brazil",
+	emission: 1.0
+});
+
+
+arr.push({
+	name: "Sweden",
+	emission: 3.5	
+});
+
+for (var i = 0; i < arr.length; i++) {
+	var obj = arr[i]
+	var name = obj.name
+	var percentage = Math.round(emFunc(emUser, obj.emission))
+	if (percentage >= 0) {
+		document.getElementById("list").innerHTML += "<li>You consume on average " + Math.abs(percentage) + "% MORE carbon dioxide than people in " + name + "!</li>"; 
+	} else {
+		document.getElementById("list").innerHTML += "<li>You consume on average " + Math.abs(percentage) + "% LESS carbon dioxide than people in " + name + "!</li>";
+	} 
+
+
+
+}
+
+
+
+
+function emFunc(emUser, emCountry){
+    return (100*(emUser - emCountry) / emCountry);
+}
+    
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel = "stylesheet" href = "styleMain.css">
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <style>
+            #map_canvas {
+                margin: auto;
+                width: 750px;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body bgcolor=#B3D1FF>
+        <h1>Relative CO2 Emission Rates</h1>
+        <div id="map_canvas" style="display: block;"></div>
+        <script>
+            var map, polys = [];
+            var mapOptions = {
+                zoom: 4,
+                center: new google.maps.LatLng(42.16,-97.72),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            jQuery.get("statescolored.xml", {}, function(data) {
+                jQuery(data).find("state").each(function() {
+                    var colour = this.getAttribute('colour');
+                    var points = this.getElementsByTagName("point");
+                    var pts = [];
+                    for (var i = 0; i < points.length; i++) {
+                        pts[i] = new google.maps.LatLng(parseFloat(points[i].getAttribute("lat")), parseFloat(points[i].getAttribute("lng")));
+                    }
+                    var poly = new google.maps.Polygon({
+                        paths: pts,
+                        strokeColor: '#000000',
+                        strokeOpacity: 1,
+                        fillColor: colour,
+                        fillOpacity: 0.65
+                    });
+                    polys.push(poly);
+                    poly.setMap(map);
+                });
+            });
+            google.maps.event.addListener(map,'center_changed',function() { checkBounds(); });
+            
+            var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(30, -160), new google.maps.LatLng(75, -85));
+            
+            function checkBounds() {    
+                if(! allowedBounds.contains(map.getCenter())) {
+                    var C = map.getCenter();
+                    var X = C.lng();
+                    var Y = C.lat();
+                    
+                    var AmaxX = allowedBounds.getNorthEast().lng();
+                    var AmaxY = allowedBounds.getNorthEast().lat();
+                    var AminX = allowedBounds.getSouthWest().lng();
+                    var AminY = allowedBounds.getSouthWest().lat();
+                    
+                    if (X < AminX) {X = AminX;}
+                    if (X > AmaxX) {X = AmaxX;}
+                    if (Y < AminY) {Y = AminY;}
+                    if (Y > AmaxY) {Y = AmaxY;}
+                    
+                    map.setCenter(new google.maps.LatLng(Y,X));
+                }
+            }
+            
+            var minZoomLevel = 3;
+            var maxZoomLevel = 5;
+            
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+                if (map.getZoom() < minZoomLevel) {
+                    map.setZoom(minZoomLevel);
+                } else if (map.getZoom() > maxZoomLevel) {
+                    map.setZoom(maxZoomLevel);
+                }
+            });
+        </script>
+        <p><img src="gradients.png" class="center resize"></p>
+        <a href="inputHHdata_2.html"> Go back to main page.</a>
+  </body>
+</html>
