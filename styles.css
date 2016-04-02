@@ -1,0 +1,22 @@
+body {
+    background-color: darkgrey;
+    font-family: Helvetica;
+}
+
+h1 {
+    color: darkgrey;
+    font-family: Helvetica;
+
+}
+
+p {
+    color:darkgrey;
+    font-family: Helvetica;
+
+}
+
+.checkbox label, .control-label, h4, h3 {
+	color: darkgrey;
+	font-family: Helvetica;
+
+}

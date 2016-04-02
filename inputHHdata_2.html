@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>	
+
+  <!-- Style sheet -->
+<link rel="stylesheet" href="styles.css">
+
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
+  <!-- Javascript calculation -->
+
+
+<body background = "earthBG.jpg">
+<div class="container">
+<h1> <font> Find Your Carbon Footprint </font> </h1>
+
+  <!-- Form class from getbootstrap.com -->
+ <form class="form-horizontal" action="Stats.html" method="get">
+
+  <div class="form-group">
+    <label for="NumPeople" class="col-sm-2 control-label labelColor">Number Of People In Your Household:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="NumPeople" name="NumPeople">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="NumMiles" class="col-sm-2 control-label">Number Of Miles Driven Per Week:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="NumMiles" name="NumMiles">
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label for="NatGas" class="col-sm-2 control-label">How Much Do You Pay For Natural Gas Every Month?</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="NatGas" name="NatGas">
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label for="Electricity" class="col-sm-2 control-label">How Much Do You Pay For Electricity Every Month?</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="Electricity" name="Electricity">
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label for="FuelOil" class="col-sm-2 control-label">How Much Do You Pay For Fuel Oil Every Month?</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="FuelOil" name="FuelOil">
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+     <h4> I recycle:</h4>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="Aluminum" name="Aluminum" > Aluminum
+        </label>
+      </div>
+       
+       <div class="checkbox">
+          <label>
+            <input type="checkbox" id="Glass" > Glass 
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="Plastic" > Plastic 
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="Paper" > Paper 
+          </label>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button class="btn btn-default" id="Calculate">Calculate</button>
+    </div>
+  </div>
+</form>
+
+</div>
+
+
+<script>
+
+document.getElementById("Calculate").addEventListener("click", calcIndivEmission);
+
+
+function calcIndivEmission(e) {
+
+  e.preventDefault();
+  const HHSIZE = parseInt(document.getElementById("NumPeople").value);
+  const WEEKSPERYEAR = 52;
+  const POUNDSCO2PERGALLON = 19.6;
+  const MONTHSPERYEAR = 12;
+  const RECYCLINGWASTE = 692;
+  const CONVERSTIONTOTONS = 0.000453592;
+
+  var numMiles = parseInt(document.getElementById("NumMiles").value) * WEEKSPERYEAR / 21.6 *  POUNDSCO2PERGALLON;
+  var natGas = parseInt(document.getElementById("NatGas").value) * MONTHSPERYEAR / 1.04 * 11.7 / HHSIZE;
+  var electricity = parseInt(document.getElementById("Electricity").value) * MONTHSPERYEAR / 118.8 * 1238.52 / HHSIZE;
+  var fuelOil = parseInt(document.getElementById("FuelOil").value) * MONTHSPERYEAR * 22.61 / 4.02 / HHSIZE;
+
+  var paper = 0;
+  var glass = 0;
+  var plastic = 0;
+  var aluminum = 0;
+
+  if (document.getElementById("Paper").checked == true) {
+    paper = 140;
+  }
+
+  if (document.getElementById("Glass").checked == true) {
+    paper = 25;
+  }  
+
+  if (document.getElementById("Plastic").checked == true) {
+    paper = 36;
+  }
+
+  if (document.getElementById("Aluminum").checked == true) {
+    paper = 89;
+  }
+
+  var recycle = RECYCLINGWASTE - paper - plastic - glass - aluminum;
+
+
+  var total = CONVERSTIONTOTONS * (numMiles + natGas + electricity + fuelOil + recycle);
+  alert(numMiles);
+}
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
