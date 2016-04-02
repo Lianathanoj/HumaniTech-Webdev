@@ -1,0 +1,16 @@
+img.center {
+    display: block;
+    margin: auto;
+}
+
+img.resize{
+    width:540px;
+    height: auto;
+}
+body {
+    font-family: Helvetica, "Times New Roman"; 	
+}
+
+h1 {
+    text-align: center;
+}
