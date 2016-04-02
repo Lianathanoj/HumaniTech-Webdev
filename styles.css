@@ -20,3 +20,10 @@ p {
 	font-family: Helvetica;
 
 }
+
+
+.colorLink {			/*m . means that it beloongs to a class */
+	font-family: Helvetica;
+	text-align: center;
+
+}
