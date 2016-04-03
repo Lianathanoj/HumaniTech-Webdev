@@ -119,7 +119,6 @@ document.getElementById("form").addEventListener("submit", calcIndivEmission);
 
 
 function calcIndivEmission(e) {
-
   const HHSIZE = parseInt(document.getElementById("NumPeople").value);
   const WEEKSPERYEAR = 52;
   const POUNDSCO2PERGALLON = 19.6;
@@ -159,8 +158,13 @@ function calcIndivEmission(e) {
   var total = CONVERSTIONTOTONS * (numMiles + natGas + electricity + fuelOil + recycle);
   total = parseFloat(total).toFixed(2);
   
+  if (isNaN(total)) {
+    alert("Plase enter valid data");
+    e.preventDefault();
+  } else {
   // send total to the next page3 of the website
-  document.getElementById("indivEmissions").value = total;
+    document.getElementById("indivEmissions").value = total;
+  }
 }
 
 </script>
